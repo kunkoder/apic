@@ -1,0 +1,117 @@
+{% extends 'walisantri/base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="page-inner page-inner-tab-style">
+        <div class="page-header">
+            <h4 class="page-title">Pengaduan</h4>
+            <ul class="breadcrumbs pt-4">
+                <li class="nav-home">
+                    <p>
+                        <i class="flaticon-home"></i>
+                    </p>
+                </li>
+                <li class="separator">
+                    <i class="flaticon-right-arrow"></i>
+                </li>
+                <li class="nav-item">
+                    <p>Wali Murid</p>
+                </li>
+                <li class="separator">
+                    <i class="flaticon-right-arrow"></i>
+                </li>
+                <li class="nav-item">
+                    <p>Pengaduan</p>
+                </li>
+            </ul>
+        </div>
+        <div class="row">
+            <div class="col-md-12 ml-auto mr-auto">
+                <div class="card">
+                    <div class="card-header text-center">
+                        <h3>
+                            <i class="flaticon-pen mr-1"></i>
+                            FORM INFO PENGADUAN
+                        </h3>
+                        <p class="card-category">SMP - SMA Insan Cendekia Boarding School</p>
+                    </div>
+                    <div class="card-body">
+                        <form class="contact-form" action="/walisantri" method="POST" enctype="multipart/form-data">
+                            <div class="form-group row">
+                                <label for="title" class="col-form-label col-md-2">Judul<span class="required-label">*</span></label>
+                                <div class="col-md-10">
+                                    <input type="text" class="form-control" id="title" name="title">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="category" class="col-form-label col-md-2">Kategori<span class="required-label">*</span></label>
+                                <div class="col-md-10">
+                                    <select name="category" class="form-control" id="category">
+                                        {% for item in category %}
+                                            <option>{{item}}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="location" class="col-form-label col-md-2">Tempat
+                                    Kejadian</label>
+                                <div class="col-md-10">
+                                    <input type="text" class="form-control" id="location" name="location">
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="time">Waktu Kejadian</label>
+                                        <div class="input-group">
+                                            <input type="text" name="time" class="form-control datetimepicker" id="time">
+                                            <div class="input-group-append">
+                                                <span class="input-group-text">
+                                                    <i class="fa fa-calendar"></i>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="sent_to">Tujuan<span class="required-label">*</span></label>
+                                        <select name="sent_to" class="form-control" id="sent_to">
+                                            {% for item in job %}
+                                                <option>{{item}}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="attachment">Lampiran</label>
+                                        <input type="file" name="attachment" class="form-control-file">
+                                        <small id="emailHelp" class="form-text text-muted">Maksimal ukuran file 10MB</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-3 mb-1">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="content">Tulis Pesan<span class="required-label">*</span></label>
+                                        <p class="text-danger help"></p>
+                                        <textarea name="content" class="form-control" id="content" rows="12"
+                                            cols="40"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="text-center mt-3 mb-3">
+                                <button type="submit" class="btn btn-primary">OK</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

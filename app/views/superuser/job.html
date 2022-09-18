@@ -1,0 +1,162 @@
+{% extends 'superuser/base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="page-inner page-inner-tab-style">
+        <div class="page-header">
+            <h4 class="page-title">{{title}}</h4>
+            <ul class="breadcrumbs pt-4">
+                <li class="nav-home">
+                    <p>
+                        <i class="flaticon-home"></i>
+                    </p>
+                </li>
+                <li class="separator">
+                    <i class="flaticon-right-arrow"></i>
+                </li>
+                <li class="nav-item">
+                    <p>Super User</p>
+                </li>
+                <li class="separator">
+                    <i class="flaticon-right-arrow"></i>
+                </li>
+                <li class="nav-item">
+                    <p>{{title}}</p>
+                </li>
+            </ul>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="d-flex align-items-center">
+                            <h4 class="card-title">Data Jabatan</h4>
+                            <button class="btn btn-primary ml-auto" data-toggle="modal"
+                                data-target="#add-job">
+                                <i class="fas fa-user-plus"></i>&nbsp;Tambah
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table id="add-row" class="display table table-striped table-hover">
+                                <thead>
+                                    <tr>
+                                        <th style="min-width: 300px">Jabatan</th>
+                                        <th style="min-width: 220px" class="no-sort">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for item in job %}
+                                    <tr>
+                                        <td>{{item.job}}</td>
+                                        <td class="text-center">
+                                            <div class="form-button-action text-white">
+                                                <a class="open-edit-job btn btn-primary"
+                                                    data-toggle="modal" href="#edit-job" data-pk="{{item.pk}}"
+                                                    data-job="{{item.job}}">
+                                                    <i class="fa fa-edit"></i>&nbsp;Ubah
+                                                </a>
+                                            </div>
+                                            <div class="form-button-action text-white">
+                                                <a class="open-delete-job btn btn-danger"
+                                                    data-toggle="modal" href="#delete-job" data-pk="{{item.pk}}"
+                                                    data-job="{{item.job}}">
+                                                    <i class="fas fa-eraser"></i>&nbsp;Hapus
+                                                </a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="add-job" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title w-100 text-center">
+                    <p class="h3">Tambah Jabatan</p>
+                </h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="/superuser/job/create" method="POST" enctype="multipart/form-data">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label for="add-job">Jabatan</label>
+                                <input name="job" id="add-job" type="text" class="form-control">
+                            </div>
+                        </div>
+                    </div><br>
+                    <div class="text-right">
+                        <button type="submit" class="btn btn-primary mr-2 mb-2">Tambah</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="edit-job" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title w-100 text-center">
+                    <p class="h3">Ubah Jabatan</p>
+                </h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="/superuser/job/update" method="POST" enctype="multipart/form-data">
+                    <input type="hidden" name="pk" id="pk">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label for="job">Jabatan</label>
+                                <input name="job" id="job" type="text" class="form-control">
+                            </div>
+                        </div>
+                    </div><br>
+                    <div class="text-right">
+                        <button type="submit" class="btn btn-primary mr-2 mb-2">Ubah</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="delete-job" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title w-100 text-center">
+                    <p class="h3">Hapus Jabatan</p>
+                </h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>yakin menghapus <span id="job"></span> ?</p>
+                <div class="text-right">
+                    <a type="button" class="pk btn btn-primary text-white mr-2 mb-2">Hapus</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

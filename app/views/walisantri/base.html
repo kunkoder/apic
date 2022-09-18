@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>{{title}} - APIC</title>
+    <meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
+    <link rel="icon" href="/images/logo-ic.png" type="image/x-icon" />
+
+    <!-- Fonts and Icons -->
+    <script src="/js/plugin/webfont/webfont.min.js"></script>
+    <script>
+        WebFont.load({
+            google: {
+                "families": ["Lato:300,400,700,900"]
+            },
+            custom: {
+                "families": ["Flaticon", "Font Awesome 5 Solid", "Font Awesome 5 Regular",
+                    "Font Awesome 5 Brands", "simple-line-icons"
+                ],
+                urls: ['/css/fonts.min.css']
+            },
+            active: function () {
+                sessionStorage.fonts = true;
+            }
+        });
+    </script>
+
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/futuristic.css">
+</head>
+
+<body style="background-image: linear-gradient(to bottom right, #4776E6, #8E54E9);">
+    <div class="wrapper horizontal-layout-3 fullwidth-style">
+        <div class="main-header no-box-shadow" data-background-color="transparent">
+            <div class="nav-top">
+                <div class="container d-flex flex-row">
+                    <button class="navbar-toggler sidenav-toggler2 ml-auto" type="button" data-toggle="collapse"
+                        data-target="collapse" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon">
+                            <i class="icon-menu"></i>
+                        </span>
+                    </button>
+                    <button class="topbar-toggler more"><i class="icon-options-vertical"></i></button>
+
+                    <!-- Logo Header -->
+                    <a href="/" class="logo logo-fixed d-flex align-items-center">
+                        <img src="/images/logo-secondary.png" alt="navbar brand" class="navbar-brand" height="35">
+                        <img src="/images/logo-primary.png" alt="navbar brand"
+                            class="navbar-brand navbar-brand-logo-fixed" height="35">
+                    </a>
+
+                    <!-- Navbar Header -->
+                    <nav class="navbar navbar-header navbar-expand-lg p-0">
+                        <div class="container-fluid p-0">
+                            <ul class="navbar-nav topbar-nav ml-md-auto align-items-center">
+                                <li class="nav-item dropdown hidden-caret">
+                                    <a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#"
+                                        aria-expanded="false">
+                                        <div class="avatar-sm">
+                                            {% if user.avatar %}
+                                                <img src="/uploads/avatar/{{user.avatar}}" alt="..." class="avatar-img rounded-circle">
+                                            {% else %}
+                                                <img src="/images/avatar.png" alt="..." class="avatar-img rounded-circle">
+                                            {% endif %}
+                                        </div>
+                                    </a>
+                                    <ul class="dropdown-menu dropdown-user animated fadeIn">
+                                        <div class="dropdown-user-scroll scrollbar-outer">
+                                            <li>
+                                                <div class="user-box">
+                                                    <div class="avatar-lg">
+                                                        {% if user.avatar %}
+                                                            <img src="/uploads/avatar/{{user.avatar}}" alt="image profile" class="avatar-img rounded">
+                                                        {% else %}
+                                                            <img src="/images/avatar.png" alt="image profile" class="avatar-img rounded">
+                                                        {% endif %}
+                                                        </div>
+                                                    <div class="u-text">
+                                                        <h4>{{user.name | title}}</h4>
+                                                        <p class="text-muted">{{user.email}}</p>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="dropdown-divider"></div>
+                                                <a class="dropdown-item" href="/walisantri/profile">Profile</a>
+                                                <a class="dropdown-item" href="/signout">Logout</a>
+                                            </li>
+                                        </div>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+        <div class="pt-lg-2">
+            <div class="container text-white pt-lg-2">
+                <nav class="navbar navbar-tab navbar-header-left navbar-expand-lg p-0">
+                    <ul class="navbar-nav page-navigation">
+                        <h3 class="title-menu bg-primary d-flex d-lg-none">
+                            Menu
+                            <div class="close-menu"> <i class="flaticon-cross"></i></div>
+                        </h3>
+                        <li class="nav-item {% if title == 'Wali Murid' %}active{% endif %}">
+                            <a class="nav-link" href="/walisantri">
+                                Pengaduan
+                            </a>
+                        </li>
+                        <li class="nav-item {% if title == 'Profile' %}active{% endif %}">
+                            <a class="nav-link" href="/walisantri/profile">
+                                Profile
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <div class="main-panel">
+
+            {% block content %}{% endblock %}
+
+        </div>
+        <div class="text-center text-white mt-2">
+            <h6>©
+                <script>
+                    document.write(new Date().getFullYear())
+                </script>, made by Humas Kominfo <br>
+                <h5><b>SMP - SMA Insan Cendekia Boarding School</b></h5>
+            </h6>
+        </div>
+    </div>
+
+    <!--   Core JS Files   -->
+    <script src="/js/core/jquery.min.js"></script>
+    <script src="/js/core/popper.min.js"></script>
+    <script src="/js/core/bootstrap.min.js"></script>
+    <script src="/js/core/futuristic.min.js"></script>
+
+    <!-- jQuery UI -->
+    <script src="/js/plugin/jquery-ui/jquery-ui.min.js"></script>
+    <!-- <script src="/js/plugin/jquery-validate/jquery-validate.min.js"></script>
+    <script src="/js/plugin/jquery-sparkline/jquery-sparkline.min.js"></script> -->
+    <script src="/js/plugin/jquery-scrollbar/jquery-scrollbar.min.js"></script>
+    <!-- <script src="/js/plugin/jquery-ui-touch-punch/jquery-ui-touch-punch.min.js"></script> -->
+
+    <!-- Moment JS -->
+    <script src="/js/plugin/moment/moment.min.js"></script>
+
+    <!-- Datatables -->
+    <script src="/js/plugin/datatables/datatables.min.js"></script>
+
+    <!-- Bootstrap -->
+    <!-- <script src="/js/plugin/bootstrap-wizard/bootstrap-wizard.min.js"></script>
+    <script src="/js/plugin/bootstrap-notify/bootstrap-notify.min.js"></script>
+    <script src="/js/plugin/bootstrap-toggle/bootstrap-toggle.min.js"></script>
+    <script src="/js/plugin/bootstrap-tagsinput/bootstrap-tagsinput.min.js"></script> -->
+    <script src="/js/plugin/bootstrap-datetimepicker/bootstrap-datetimepicker.min.js"></script>
+    <script>
+        $('.datetimepicker').datetimepicker({
+            format: "DD-MM-YYYY HH:mm",
+        });
+    </script>
+
+    <!-- Select -->
+    <!-- <script src="/js/plugin/select/select.min.js"></script> -->
+
+    <!-- Sweet Alert -->
+    <script src="/js/plugin/sweetalert/sweetalert.min.js"></script>
+    <script>
+        {% if messages.warning %}
+            Swal.fire(
+                'Peringatan!',
+                '{{messages.warning}}',
+                'warning'
+            ); 
+        {% endif %}
+        {% if messages.success %}
+            Swal.fire(
+                'Berhasil!',
+                '{{messages.success}}',
+                'success'
+            ); 
+        {% endif %}
+    </script>
+
+    <!-- Complain Help -->
+    <script>
+        $(document).ready(function () {
+            $('#sent_to').change(function () {
+                var sent_to = $('#sent_to').val();
+                if(sent_to == 'Wakasek Kurikulum (SMP)' || sent_to == 'Wakasek Kurikulum (SMA)') {
+                    $('.help').html('Masukan keluhan & saran anda mengenai sistem akademik & proses pembelajaran');
+                }
+                else if(sent_to == 'Wakasek Kesiswaan (SMP)' || sent_to == 'Wakasek Kesiswaan (SMA)') {
+                    $('.help').html('Masukan keluhan & saran anda mengenai program kegiatan kesiswaan');
+                }
+                else if(sent_to == 'Kepala Asrama (SMP)' || sent_to == 'Kepala Asrama (SMA)') {
+                    $('.help').html('Masukan keluhan & saran anda mengenai program imtaq & pola asuh asrama');
+                }
+                else if(sent_to == 'Kepala Keuangan & Operasional') {
+                    $('.help').html('Masukan keluhan & saran anda mengenai administrasi keuangan, sarana, prasarana, security & dapur');
+                }
+                else if(sent_to == 'Kepala Tata Usaha') {
+                    $('.help').html('Masukan keluhan & saran anda mengenai administrasi sekolah');
+                }
+                else if(sent_to == 'Wali Kelas VII' || sent_to == 'Wali Kelas VIII' || sent_to == 'Wali Kelas IX' || sent_to == 'Wali Kelas X' || sent_to == 'Wali Kelas XI' || sent_to == 'Wali Kelas XII') {
+                    $('.help').html('Masukan keluhan & saran anda mengenai perkembangan akademis siswa');
+                }
+                else if(sent_to == 'Wali Asrama Putra (SMP)' || sent_to == 'Wali Asrama Putra (SMA)' || sent_to == 'Wali Asrama Putri (SMP)' || sent_to == 'Wali Asrama Putri (SMA)') {
+                    $('.help').html('Masukan keluhan & saran anda mengenai perkembangan pola asuh siswa');
+                }
+                else if(sent_to == 'Kepala Humas Kominfo') {
+                    $('.help').html('Masukan keluhan & saran anda mengenai kehumasan, sistem komunikasi & IT');
+                }
+                else {
+                    $('.help').html('');
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

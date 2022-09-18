@@ -1,0 +1,160 @@
+{% extends 'superuser/base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="page-inner page-inner-tab-style">
+        <div class="page-header">
+            <h4 class="page-title">{{title}}</h4>
+            <ul class="breadcrumbs pt-4">
+                <li class="nav-home">
+                    <p>
+                        <i class="flaticon-home"></i>
+                    </p>
+                </li>
+                <li class="separator">
+                    <i class="flaticon-right-arrow"></i>
+                </li>
+                <li class="nav-item">
+                    <p>Super User</p>
+                </li>
+                <li class="separator">
+                    <i class="flaticon-right-arrow"></i>
+                </li>
+                <li class="nav-item">
+                    <p>{{title}}</p>
+                </li>
+            </ul>
+        </div>
+        <div class="row">
+            <div class="col-md-12 ml-auto mr-auto">
+                <div class="card card-profile">
+                    <div class="card-header" style="background-image: url('/images/bg-profile.jpg')">
+                        <div class="profile-picture">
+                            <div class="avatar avatar-xl">
+                                {% if complain.avatar %}
+                                    <img src="/uploads/avatar/{{complain.avatar}}" alt="..." class="avatar-img rounded-circle">
+                                {% else %}
+                                    <img src="/images/avatar.png" alt="..." class="avatar-img rounded-circle">
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="user-profile text-center">
+                            <div class="name">{{complain.name | title}}</div>
+                            <div class="job">{{complain.received_at}}</div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <form class="contact-form" action="/superuser/complain/detail" method="POST"
+                            enctype="multipart/form-data">
+                            <input type="hidden" name="pk" value="{{complain.pk}}">
+                            <input type="hidden" name="name" value="{{complain.name}}">
+                            <fieldset disabled="disabled">
+                                <div class="form-group row">
+                                    <label for="pk" class="col-form-label col-md-2">Nomor Surat</label>
+                                    <div class="col-md-10">
+                                        <input type="text" class="form-control" id="pk" name="pk" value="{{complain.pk}}">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="sent_to" class="col-form-label col-md-2">Tujuan</label>
+                                    <div class="col-md-10">
+                                        <input type="text" class="form-control" id="sent_to" name="sent_to"
+                                            value="{{complain.sent_to}}">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="title" class="col-form-label col-md-2">Judul</label>
+                                    <div class="col-md-10">
+                                        <input type="text" class="form-control" id="title" name="title"
+                                            value="{{complain.title | title}}">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="location" class="col-form-label col-md-2">Tempat
+                                        Kejadian</label>
+                                    <div class="col-md-10">
+                                        <input type="text" class="form-control" id="location"
+                                            name="location" value="{{complain.location}}">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="time" class="col-form-label col-md-2">Waktu Kejadian</label>
+                                    <div class="col-md-10">
+                                        <input type="text" class="form-control" id="time" name="time"
+                                            value="{{complain.time}}">
+                                    </div>
+                                </div>
+                                <div class="row mt-3 mb-1">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="content">Pesan</label>
+                                            <p>{{complain.content}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% if complain.note and complain.forwarded_at %}
+                                <div class="row mt-3 mb-1">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="content">Catatan</label>
+                                            <p>{{complain.note}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endif %}
+                                {% if complain.attachment %}
+                                <div class="row mt-3">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <a href="/uploads/attachment/{{complain.attachment}}">
+                                                <i class="fa fa-paperclip"></i> Download Lampiran
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endif %}
+                                {% if complain.letter and complain.forwarded_at %}
+                                <div class="row mt-3">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <a href="/uploads/letter/{{complain.letter}}"><i
+                                                    class="fa fa-paperclip"></i> Download Surat Balasan
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endif %}
+                            </fieldset>
+                            {% if not complain.forwarded_at %}
+                            <div class="row mt-3 mb-1">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="note">catatan</label>
+                                        <textarea name="note" class="form-control" id="note" rows="10"
+                                            cols="80">{{ complain.note }}</textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="letter">Upload Surat</label>
+                                        <input type="file" name="letter" class="form-control-file">
+                                        <small id="emailHelp" class="form-text text-muted">Maksimal ukuran file 10MB dalam format .pdf</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="text-center mt-3 mb-3">
+                                <button type="submit" class="btn btn-primary">Kirim Respon</button>
+                            </div>
+                            {% endif %}
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

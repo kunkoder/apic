@@ -1,0 +1,234 @@
+{% extends 'superuser/base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="page-inner page-inner-tab-style">
+        <div class="page-header">
+            <h4 class="page-title">{{title}}</h4>
+            <ul class="breadcrumbs pt-4">
+                <li class="nav-home">
+                    <p>
+                        <i class="flaticon-home"></i>
+                    </p>
+                </li>
+                <li class="separator">
+                    <i class="flaticon-right-arrow"></i>
+                </li>
+                <li class="nav-item">
+                    <p>Super User</p>
+                </li>
+                <li class="separator">
+                    <i class="flaticon-right-arrow"></i>
+                </li>
+                <li class="nav-item">
+                    <p>{{title}}</p>
+                </li>
+            </ul>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="d-flex align-items-center">
+                            <h4 class="card-title">Data Staff ICBS</h4>
+                            <button class="btn btn-primary ml-auto" data-toggle="modal"
+                                data-target="#add-icbsstaff">
+                                <i class="fas fa-user-plus"></i>&nbsp;Tambah
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table id="add-row" class="display table table-striped table-hover">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 10%" class="no-sort">Foto Profile</th>
+                                        <th style="min-width: 170px">Nama</th>
+                                        <th style="min-width: 170px">Email</th>
+                                        <th style="min-width: 170px">Jabatan</th>
+                                        <th style="min-width: 130px">Dibuat</th>
+                                        <th style="min-width: 130px">Diverifikasi</th>
+                                        <th style="min-width: 130px">Diubah</th>
+                                        <th style="min-width: 220px" class="no-sort">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for item in icbsstaff %}
+                                    <tr>
+                                        <td>
+                                            <div class="avatar avatar-lg">
+                                                {% if item.avatar %}
+                                                <img src="/uploads/avatar/{{item.avatar}}" alt="..." class="avatar-img rounded-circle">
+                                                {% else %}
+                                                <img src="/images/avatar.png" alt="..." class="avatar-img rounded-circle">
+                                                {% endif %}
+                                            </div>
+                                        </td>
+                                        <td>{{item.name | title}}</td>
+                                        <td>{{item.email}}</td>
+                                        <td>{{item.job}}</td>
+                                        <td>{{item.created_at}}</td>
+                                        <td>{{item.verified_at}}</td>
+                                        <td>{{item.updated_at}}</td>
+                                        <td class="text-center">
+                                            <div class="form-button-action text-white">
+                                                <a class="open-edit-icbsstaff btn btn-primary"
+                                                    data-toggle="modal" href="#edit-icbsstaff" data-pk="{{item.pk}}"
+                                                    data-avatar="{{item.avatar}}" data-name="{{item.name}}"
+                                                    data-email="{{item.email}}" data-job="{{item.job}}">
+                                                    <i class="fa fa-edit"></i>&nbsp;Ubah
+                                                </a>
+                                            </div>
+                                            <div class="form-button-action text-white">
+                                                <a class="open-delete-icbsstaff btn btn-danger"
+                                                    data-toggle="modal" href="#delete-icbsstaff" data-pk="{{item.pk}}"
+                                                    data-name="{{item.name}}">
+                                                    <i class="fas fa-eraser"></i>&nbsp;Hapus
+                                                </a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="add-icbsstaff" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title w-100 text-center">
+                    <p class="h3">Tambah Data Staff ICBS</p>
+                </h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="/superuser/account/icbsstaff/create" method="POST" enctype="multipart/form-data">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label for="add-name">Nama</label>
+                                <input name="name" id="addname" type="text" class="form-control" placeholder="Hamba Allah">
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label for="add-email">Email</label>
+                                <input name="email" id="add-email" type="email" class="form-control" placeholder="contoh@email.com">
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label for="add-password">Password</label>
+                                <input name="password" id="add-password" type="password" class="form-control"
+                                    placeholder="Kata Sandi">
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label for="add-job">Jabatan</label>
+                                <select name="job" class="form-control" id="add-job">
+                                    {% for item in job %}
+                                    <option>{{item}}</option>
+                                {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label for="add-avatar">Foto Profile</label>
+                                <input type="file" name="avatar" class="form-control-file" id="add-avatar">
+                            </div>
+                        </div>
+                    </div><br>
+                    <div class="text-right">
+                        <button type="submit" class="btn btn-primary mr-2 mb-2">Tambah</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="edit-icbsstaff" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title w-100 text-center">
+                    <p class="h3">Ubah Data Staff ICBS</p>
+                </h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="/superuser/account/icbsstaff/update" method="POST" enctype="multipart/form-data">
+                    <input type="hidden" name="pk" id="pk">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label for="name">Nama</label>
+                                <input name="name" id="name" type="text" class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input name="email" id="email" type="email" class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label for="job">Jabatan</label>
+                                <select name="job" class="form-control" id="job">
+                                    {% for item in job %}
+                                        <option>{{item}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label for="avatar">Foto Profile</label>
+                                <input type="file" name="avatar" class="form-control-file">
+                            </div>
+                        </div>
+                    </div><br>
+                    <div class="text-right">
+                        <button type="submit" class="btn btn-primary mr-2 mb-2">Ubah</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="delete-icbsstaff" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title w-100 text-center">
+                    <p class="h3">Hapus Data Staff ICBS</p>
+                </h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>yakin menghapus data <span id="name"></span> ?</p>
+                <div class="text-right">
+                    <a type="button" class="pk btn btn-primary text-white mr-2 mb-2">Hapus</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

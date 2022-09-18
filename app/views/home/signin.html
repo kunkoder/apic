@@ -1,0 +1,39 @@
+{% extends 'home/base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="page-inner pt-5">
+        <div class="row pt-5">
+            <div class="col-md-4 ml-auto mr-auto pt-5">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="text-center pt-3 pb-3">
+                            <p class="h3"><b>LOGIN</b></p>
+                        </div>
+                        <form class="contact-form" action="/signin" method="POST"
+                            enctype="multipart/form-data">
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input id="email" name="email" type="email" class="form-control" placeholder="contoh@email.com">
+                            </div>
+                            <div class="form-group">
+                                <label for="password">Password</label>
+                                <input id="password" name="password" type="password" class="form-control" placeholder="Kata Sandi">
+                            </div>
+                            <div class="form-group">
+                                <a href="/forgotpass">Lupa password?</a>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary col-12">Masuk</button>
+                            </div>
+                            <div class="form-group text-center">
+                                Belum punya akun? <a href="/signup">Daftar</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

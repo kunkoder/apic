@@ -1,0 +1,331 @@
+{% extends 'superuser/base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="page-inner page-inner-tab-style">
+        <div class="page-header">
+            <h4 class="page-title">{{title}}</h4>
+            <ul class="breadcrumbs pt-4">
+                <li class="nav-home">
+                    <p>
+                        <i class="flaticon-home"></i>
+                    </p>
+                </li>
+                <li class="separator">
+                    <i class="flaticon-right-arrow"></i>
+                </li>
+                <li class="nav-item">
+                    <p>Super User</p>
+                </li>
+                <li class="separator">
+                    <i class="flaticon-right-arrow"></i>
+                </li>
+                <li class="nav-item">
+                    <p>{{title}}</p>
+                </li>
+            </ul>
+        </div>
+        <div>
+            <form action="/superuser/account/santri/action" method="POST">
+                <div class="row">
+                    <div class="col-sm-12 col-md-4">
+                        <button class="btn btn-lg btn-block btn-primary" type="submit" name="print"
+                            style="padding: 25px;">
+                            <i class="fas fa-print fa-lg"></i>&nbsp;&nbsp;<span class="h3">Cetak</span>
+                        </button>
+                    </div>
+                    <div class="col-sm-12 col-md-4">
+                        <button class="btn btn-lg btn-block btn-secondary" type="submit" name="import"
+                            style="padding: 25px;" data-toggle="modal" data-target="#import-santri">
+                            <i class="fas fa-file-import fa-lg"></i>&nbsp;&nbsp;<span class="h3">Import</span>
+                        </button>
+                    </div>
+                    <div class="col-sm-12 col-md-4">
+                        <button class="btn btn-lg btn-block btn-info" type="submit" name="export"
+                            style="padding: 25px;">
+                            <i class="fas fa-file-export fa-lg"></i>&nbsp;&nbsp;<span class="h3">Export</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="row pt-4">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="d-flex align-items-center">
+                                    <h4 class="card-title">Data Peserta Didik</h4>
+                                    <div class="btn-group ml-auto" role="group">
+                                        <button class="btn btn-danger" type="submit" name="remove">
+                                            <i class="fas fa-eraser"></i>&nbsp;Hapus
+                                        </button>
+                                        <button class="btn btn-primary" data-toggle="modal" data-target="#add-santri"
+                                            type="button">
+                                            <i class="fas fa-user-plus"></i>&nbsp;Tambah
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table id="add-row" class="display table table-striped table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th class="no-sort">
+                                                    <div class="custom-checkbox custom-control">
+                                                        <input type="checkbox" class="custom-control-input"
+                                                            id="checkbox-all">
+                                                        <label for="checkbox-all"
+                                                            class="custom-control-label">&nbsp;</label>
+                                                    </div>
+                                                </th>
+                                                <th style="min-width: 130px">NIS</th>
+                                                <th style="min-width: 170px">Nama</th>
+                                                <th style="min-width: 130px">Jenis Kelamin</th>
+                                                <th style="min-width: 100px">Tahun Masuk</th>
+                                                <th style="min-width: 80px">Kelas</th>
+                                                <th style="min-width: 170px">Nama Ibu</th>
+                                                <th style="min-width: 170px">Nama Ayah</th>
+                                                <th style="min-width: 220px" class="no-sort">Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for item in santri %}
+                                            <tr>
+                                                <td>
+                                                    <div class="custom-checkbox custom-control">
+                                                        <input type="checkbox" name="data" class="custom-control-input"
+                                                            id="{{item.pk}}" value="{{item.pk}}">
+                                                        <label for="{{item.pk}}"
+                                                            class="custom-control-label">&nbsp;</label>
+                                                    </div>
+                                                </td>
+                                                <td>{{item.nis}}</td>
+                                                <td>{{item.name | title}}</td>
+                                                <td>{{item.gender | title}}</td>
+                                                <td>{{item.year}}</td>
+                                                <td>{{item.grade}}</td>
+                                                <td>{{item.mother | title}}</td>
+                                                <td>{{item.father | title}}</td>
+                                                <td class="text-center">
+                                                    <div class="form-button-action text-white">
+                                                        <a class="open-edit-santri btn btn-primary" data-toggle="modal"
+                                                            href="#edit-santri" data-pk="{{item.pk}}"
+                                                            data-nis="{{item.nis}}" data-name="{{item.name}}"
+                                                            data-gender="{{item.gender}}" data-year="{{item.year}}"
+                                                            data-grade="{{item.grade}}" data-mother="{{item.mother}}"
+                                                            data-father="{{item.father}}">
+                                                            <i class="fa fa-edit"></i>&nbsp;Ubah
+                                                        </a>
+                                                    </div>
+                                                    <div class="form-button-action text-white">
+                                                        <a class="open-delete-santri btn btn-danger" data-toggle="modal"
+                                                            href="#delete-santri" data-pk="{{item.pk}}"
+                                                            data-name="{{item.name}}">
+                                                            <i class="fas fa-eraser"></i>&nbsp;Hapus
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="add-santri" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title w-100 text-center">
+                    <p class="h3">Tambah Data Peserta Didik</p>
+                </h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="/superuser/account/santri/create" method="POST">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label for="add-nis">NIS (Nomor Induk Siswa)</label>
+                                <input name="nis" id="add-nis" type="text" class="form-control" placeholder="181910000">
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label for="add-name">Nama</label>
+                                <input name="name" id="add-name" type="text" class="form-control"
+                                    placeholder="Hamba Allah">
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label for="add-gender">Gender</label>
+                                <select name="gender" class="form-control" id="add-gender">
+                                    <option>Laki-Laki</option>
+                                    <option>Perempuan</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label for="add-year">Tahun Masuk</label>
+                                <input name="year" id="add-year" type="number" class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label for="add-grade">Kelas</label>
+                                <input name="grade" id="add-grade" type="text" class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label for="add-mother">Nama Ibu</label>
+                                <input name="mother" id="add-mother" type="text" class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label for="add-father">Nama Ayah</label>
+                                <input name="father" id="add-father" type="text" class="form-control">
+                            </div>
+                        </div>
+                    </div><br>
+                    <div class="text-right">
+                        <button type="submit" class="btn btn-primary mr-2 mb-2">Tambah</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="edit-santri" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title w-100 text-center">
+                    <p class="h3">Ubah Data Peserta Didik</p>
+                </h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="/superuser/account/santri/update" method="POST">
+                    <input type="hidden" name="pk" id="pk">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label for="nis">NIS</label>
+                                <input name="nis" id="nis" type="text" class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label for="name">Nama</label>
+                                <input name="name" id="name" type="text" class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label for="gender">Gender</label>
+                                <select name="gender" class="form-control" id="gender">
+                                    <option>Laki-Laki</option>
+                                    <option>Perempuan</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label for="year">Tahun Masuk</label>
+                                <input name="year" id="year" type="number" class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label for="grade">Kelas</label>
+                                <input name="grade" id="grade" type="text" class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label for="mother">Nama Ibu</label>
+                                <input name="mother" id="mother" type="text" class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label for="father">Nama Ayah</label>
+                                <input name="father" id="father" type="text" class="form-control">
+                            </div>
+                        </div>
+                    </div><br>
+                    <div class="text-right">
+                        <button type="submit" class="btn btn-primary mr-2 mb-2">Ubah</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="delete-santri" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title w-100 text-center">
+                    <p class="h3">Hapus Data Peserta Didik</p>
+                </h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>yakin menghapus data <span id="name"></span> ?</p>
+                <div class="text-right">
+                    <a type="button" class="pk btn btn-primary text-white mr-2 mb-2">Hapus</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="import-santri" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title w-100 text-center">
+                    <p class="h3">Import Data Peserta Didik</p>
+                </h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="/superuser/account/santri/import" method="POST" enctype="multipart/form-data">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label for="add-avatar">Pilih File</label>
+                                <input type="file" name="santri" class="form-control-file" id="add-avatar">
+                            </div>
+                        </div>
+                    </div><br>
+                    <div class="text-right">
+                        <button type="submit" class="btn btn-primary mr-2 mb-2">Import</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

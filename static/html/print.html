@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.0/css/bulma.min.css">
+</head>
+
+<body>
+    <section class="section">
+        <div class="container">
+            <h1 class="title has-text-centered">
+                Data Siswa
+            </h1>
+            <h2 class="subtitle has-text-centered">SMP - SMA Insan Cendekia Boarding School</h2>
+        </div>
+    </section>
+    <section class="section" style="min-width: 600px;">
+        <div class="container">
+            <table class="table is-striped">
+                <thead>
+                    <tr class="has-text-left">
+                        <th>No.</th>
+                        <th style="min-width: 80px;"><small>NIS</small></th>
+                        <th style="min-width: 120px;"><small>Nama</small></th>
+                        <th style="min-width: 80px;"><small>Jenis Kelamin</small></th>
+                        <th style="min-width: 50px;"><small>Tahun Masuk</small></th>
+                        <th style="min-width: 30px;"><small>Kelas</small></th>
+                        <th style="min-width: 120px;"><small>Nama Ibu</small></th>
+                        <th style="min-width: 120px;"><small>Nama Ayah</small></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each santri}}
+                    <tr>
+                        <td><span class="is-size-7">{{this.no}}</span></td>
+                        <td><span class="is-size-7">{{this.nis}}</span></td>
+                        <td><span class="is-size-7">{{this.name}}</span></td>
+                        <td><span class="is-size-7">{{this.gender}}</span></td>
+                        <td><span class="is-size-7">{{this.year}}</span></td>
+                        <td><span class="is-size-7">{{this.grade}}</span></td>
+                        <td><span class="is-size-7">{{this.mother}}</span></td>
+                        <td><span class="is-size-7">{{this.father}}</span></td>
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+        </div>
+    </section>
+    <section class="section">
+        <div class="container">
+            <h6 class="has-text-centered">©
+                <script>
+                    document.write(new Date().getFullYear())
+                </script>, made by Humas Kominfo <br>
+                <h5 class="has-text-centered"><b>SMP - SMA Insan Cendekia Boarding School</b></h5>
+            </h6>
+        </div>
+    </section>
+</body>
+
+</html>

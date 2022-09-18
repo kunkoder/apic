@@ -1,0 +1,45 @@
+{% extends 'home/base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="page-inner pt-5">
+        <div class="row">
+            <div class="col-md-4 ml-auto mr-auto">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="text-center pt-3 pb-3">
+                            <p class="h3"><b>REGISTER</b></p>
+                        </div>
+                        <form class="contact-form" action="/signup" method="POST"
+                            enctype="multipart/form-data">
+                            <div class="form-group">
+                                <label for="name">Username</label>
+                                <input id="name" name="name" type="text" class="form-control" placeholder="Hamba Allah">
+                            </div>
+                            <div class="form-group">
+                                <label for="nis">NIS (Nomor Induk Siswa)</label>
+                                <input id="nis" name="nis" type="text" class="form-control" placeholder="18191XXXX">
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input id="email" name="email" type="email" class="form-control" placeholder="contoh@email.com">
+                            </div>
+                            <div class="form-group">
+                                <label for="password">Password</label>
+                                <input id="password" name="password" type="password" class="form-control" placeholder="Kata Sandi">
+                                <small id="emailHelp" class="form-text text-muted">Password minimal 8 karakter</small>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary col-12">Daftar</button>
+                            </div>
+                            <div class="form-group text-center">
+                                Sudah punya akun? <a href="/signin">Masuk</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

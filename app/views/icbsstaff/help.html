@@ -1,0 +1,83 @@
+{% extends 'icbsstaff/base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="page-inner page-inner-tab-style">
+        <div class="page-header">
+            <h4 class="page-title">{{title}}</h4>
+            <ul class="breadcrumbs pt-4">
+                <li class="nav-home">
+                    <p>
+                        <i class="flaticon-home"></i>
+                    </p>
+                </li>
+                <li class="separator">
+                    <i class="flaticon-right-arrow"></i>
+                </li>
+                <li class="nav-item">
+                    <p>Staff ICBS</p>
+                </li>
+                <li class="separator">
+                    <i class="flaticon-right-arrow"></i>
+                </li>
+                <li class="nav-item">
+                    <p>{{title}}</p>
+                </li>
+            </ul>
+        </div>
+        <div class="row">
+            <div class="col-md-12 ml-auto mr-auto">
+                <div class="card card-profile">
+                    <div class="card-body">
+                        <div class="form-group">
+                            <p class="h4"><b>Pengaduan Masuk</b></p>
+                            <p>Pengaduan masuk adalah menu yang menyimpan pengaduan yang masuk ke masing-masing
+                                pihak internal sekolah sesuai jabatannya</p>
+                            <p class="h4"><b>Pengaduan Diteruskan</b></p>
+                            <p>Pengaduan diteruskan adalah menu yang menyimpan pengaduan yang telah dibalas dan diteruskan ke
+                                humas(admin) untuk diverifikasi</p>
+                            <p class="h4"><b>Menjawab Pengaduan</b></p>
+                            <ol>
+                                <li>Buka halaman login</li>
+                                <li>Silahkan login dengan akun yang telah dibuat oleh humas(admin)</li>
+                                <li>Klik menu <b>Pengaduan Masuk</b></li>
+                                <li>Pilih pengaduan yang ingin dibalas, klik buka yang terdapat pada sisi paling kanan
+                                    baris</li>
+                                <li>Silahkan isi catatan yang akan dilihat oleh humas(admin)</li>
+                                <li>Upload balasan berupa surat resmi dalam format PDF</li>
+                                <li>Klik kirim respon yang ada di bagian bawah form</li>
+                                <li>Surat akan diteruskan ke humas(admin) untuk diverifikasi, dan pengaduan berpindah ke
+                                    menu <b>Pengaduan Diteruskan</b></li>
+                                <li>Jika surat telah sesuai, maka akan ada notifikasi email surat terkirim sebagai
+                                    balasan pengaduan ke email wali murid</li>
+                                <li>Jika surat dikembalikan oleh humas(admin), maka akan ada notifikasi untuk
+                                    memperbaiki surat, dan pengaduan kembali ke menu <b>Pengaduan Masuk</b></li>
+                            </ol>
+                            <p class="h4"><b>Mengubah Password</b></p>
+                            <ol>
+                                <li>Buka halaman login</li>
+                                <li>Klik lupa password yang terdapat di tengah form login</li>
+                                <li>Masukan email yang sama pada saat pembuatan akun, klik kirim</li>
+                                <li>Link ubah password akan dikirim via email</li>
+                                <li>Buka email dan klik link ubah password yang tersedia</li>
+                                <li>Masukan password baru, klik reset</li>
+                                <li>Silahkan login dengan password yang baru</li>
+                            </ol>
+                            <p class="h4"><b>Mengubah Profile Akun</b></p>
+                            <ol>
+                                <li>Buka halaman login</li>
+                                <li>Silahkan login dengan akun yang telah dibuat</li>
+                                <li>Klik tab profile</li>
+                                <li>Silahkan ubah profile sesuai kehendak</li>
+                                <li>Klik simpan untuk menyimpan perubahan</li>
+                                <li>Jika mengubah email, maka perlu melakukan aktivasi ulang akun melalui email yang
+                                    baru</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

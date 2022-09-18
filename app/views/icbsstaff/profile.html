@@ -1,0 +1,87 @@
+{% extends 'icbsstaff/base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="page-inner page-inner-tab-style">
+        <div class="page-header">
+            <h4 class="page-title">{{title}}</h4>
+            <ul class="breadcrumbs pt-4">
+                <li class="nav-home">
+                    <p>
+                        <i class="flaticon-home"></i>
+                    </p>
+                </li>
+                <li class="separator">
+                    <i class="flaticon-right-arrow"></i>
+                </li>
+                <li class="nav-item">
+                    <p>Staff ICBS</p>
+                </li>
+                <li class="separator">
+                    <i class="flaticon-right-arrow"></i>
+                </li>
+                <li class="nav-item">
+                    <p>{{title}}</p>
+                </li>
+            </ul>
+        </div>
+        <div class="row">
+            <div class="col-md-12 ml-auto mr-auto">
+                <div class="card card-profile">
+                    <div class="card-header" style="background-image: url('/images/bg-profile.jpg')">
+                        <div class="profile-picture">
+                            <div class="avatar avatar-xxl">
+                                {% if user.avatar %}
+                                    <img src="/uploads/avatar/{{user.avatar}}" alt="image profile" class="avatar-img rounded-circle mt-4">
+                                {% else %}
+                                    <img src="/images/avatar.png" alt="image profile" class="avatar-img rounded-circle mt-4">
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <form class="contact-form" action="/icbsstaff/profile" method="POST"
+                            enctype="multipart/form-data">
+                            <input type="hidden" name="pk" id="pk" value="{{user.pk}}">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <label for="name">Nama</label>
+                                        <input name="name" id="name" type="text" class="form-control" value="{{user.name}}">
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <label for="email">Email</label>
+                                        <input name="email" id="email" type="email" class="form-control" value="{{user.email}}">
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <label for="job">Jabatan</label>
+                                        <select name="job" class="form-control" id="job">
+                                            {% for item in job %}
+                                                <option {% if user.job == item %} selected {% endif %}>{{ item }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <label for="avatar">Foto Profil</label>
+                                        <input type="file" name="avatar" class="form-control-file">
+                                        <small id="emailHelp" class="form-text text-muted">Maksimal ukuran file 5MB</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="text-center mt-3 mb-3">
+                                <button type="submit" class="btn btn-primary">Simpan</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

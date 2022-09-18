@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>{{title}} - APIC</title>
+    <meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
+    <link rel="icon" href="/images/logo-ic-xs.png" type="image/x-icon" />
+
+    <!-- Fonts and Icons -->
+    <script src="/js/plugin/webfont/webfont.min.js"></script>
+    <script>
+        WebFont.load({
+            google: {
+                "families": ["Lato:300,400,700,900"]
+            },
+            custom: {
+                "families": ["Flaticon", "Font Awesome 5 Solid", "Font Awesome 5 Regular",
+                    "Font Awesome 5 Brands", "simple-line-icons"
+                ],
+                urls: ['/css/fonts.min.css']
+            },
+            active: function () {
+                sessionStorage.fonts = true;
+            }
+        });
+    </script>
+
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/futuristic.css">
+</head>
+
+<body data-background-color="custom" custom-background="/images/bg-icbs.jpg" style="background-attachment: fixed; background-position: center;">
+    <div class="wrapper horizontal-layout-3">
+        <div class="main-header no-box-shadow" data-background-color="transparent">
+            <div class="nav-top">
+                <div class="container d-flex flex-row">
+                    <button class="navbar-toggler sidenav-toggler2 ml-auto" type="button" data-toggle="collapse"
+                        data-target="collapse" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon">
+                            <i class="icon-menu"></i>
+                        </span>
+                    </button>
+
+                    <!-- Logo Header -->
+                    <a href="/" class="logo logo-fixed d-flex align-items-center pt-2 mr-auto">
+                        <img src="/images/logo-secondary.png" alt="navbar brand" class="navbar-brand" height="35">
+                        <img src="/images/logo-primary.png" alt="navbar brand"
+                            class="navbar-brand navbar-brand-logo-fixed" height="35">
+                    </a>
+
+                    <!-- Navbar Header -->
+                    <nav class="navbar navbar-header-left navbar-expand-lg p-0">
+                        <ul class="navbar-nav page-navigation pl-md-3">
+                            <h3 class="title-menu d-flex d-lg-none">
+                                Menu
+                                <div class="close-menu"> <i class="flaticon-cross"></i></div>
+                            </h3>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/signin">
+                                    <p class="h5 mt-2">Masuk</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/signup">
+                                    <p class="h5 mt-2">Daftar</p>
+                                </a>
+                            </li> 
+                            <li class="nav-item">
+                                <a class="nav-link" href="/help">
+                                    <p class="h5 mt-2">Bantuan</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+        <div class="main-panel pt-5">
+
+            {% block content %}{% endblock %}
+
+        </div>
+        <div class="text-center text-white">
+            <h5><b>{{visitors}} Pengunjung</b></h5>
+            <h6>©
+                <script>
+                    document.write(new Date().getFullYear())
+                </script>, made by Humas Kominfo <br>
+                <h5><b>SMP - SMA Insan Cendekia Boarding School</b></h5>
+            </h6>
+        </div>
+    </div>
+
+    <!--   Core JS Files   -->
+    <script src="/js/core/jquery.min.js"></script>
+    <script src="/js/core/popper.min.js"></script>
+    <script src="/js/core/bootstrap.min.js"></script>
+    <script src="/js/core/futuristic.min.js"></script>
+
+    <!-- jQuery UI -->
+    <script src="/js/plugin/jquery-ui/jquery-ui.min.js"></script>
+    <script src="/js/plugin/jquery-scrollbar/jquery-scrollbar.min.js"></script>
+
+    <!-- Sweet Alert -->
+    <script src="/js/plugin/sweetalert/sweetalert.min.js"></script>
+    <script>
+        {% if messages.warning %}
+            Swal.fire(
+                'Peringatan!',
+                '{{messages.warning}}',
+                'warning'
+            ); 
+        {% endif %}
+        {% if messages.success %}
+            Swal.fire(
+                'Berhasil!',
+                '{{messages.success}}',
+                'success'
+            ); 
+        {% endif %}
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,130 @@
+{% extends 'icbsstaff/base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="page-inner page-inner-tab-style">
+        <div class="page-header">
+            <h4 class="page-title">{{title}}</h4>
+            <ul class="breadcrumbs pt-4">
+                <li class="nav-home">
+                    <p>
+                        <i class="flaticon-home"></i>
+                    </p>
+                </li>
+                <li class="separator">
+                    <i class="flaticon-right-arrow"></i>
+                </li>
+                <li class="nav-item">
+                    <p>Staff ICBS</p>
+                </li>
+                <li class="separator">
+                    <i class="flaticon-right-arrow"></i>
+                </li>
+                <li class="nav-item">
+                    <p>{{title}}</p>
+                </li>
+            </ul>
+        </div>
+        <div class="row">
+            <div class="col-sm-12 col-md-6">
+                <div class="card card-stats card-round">
+                    <a class="card-block stretched-link text-decoration-none" style="text-decoration: none;"
+                        href="/icbsstaff">
+                        <div class="card-body ">
+                            <div class="row align-items-center">
+                                <div class="col-icon">
+                                    <div class="icon-big text-center icon-primary bubble-shadow-small">
+                                        <i class="flaticon-inbox"></i>
+                                    </div>
+                                </div>
+                                <div class="col col-stats ml-3 ml-sm-0">
+                                    <div class="numbers">
+                                        <p class="card-category">Pengaduan Masuk</p>
+                                        <h4 class="card-title">{{received}}</h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-6">
+                <div class="card card-stats card-round">
+                    <a class="card-block stretched-link text-decoration-none" style="text-decoration: none;"
+                        href="/icbsstaff/complain/forwarded">
+                        <div class="card-body ">
+                            <div class="row align-items-center">
+                                <div class="col-icon">
+                                    <div class="icon-big text-center icon-secondary bubble-shadow-small">
+                                        <i class="flaticon-archive"></i>
+                                    </div>
+                                </div>
+                                <div class="col col-stats ml-3 ml-sm-0">
+                                    <div class="numbers">
+                                        <p class="card-category">Pengaduan Diteruskan</p>
+                                        <h4 class="card-title">{{forwarded}}</h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header text-center">
+                        <h3>
+                            {{user.job}}
+                        </h3>
+                        <p class="card-category">SMP - SMA Insan Cendekia Boarding School</p>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table id="add-row" class="display table table-striped table-hover">
+                                <thead>
+                                    <tr>
+                                        <th style="min-width: 80px" class="no-sort">Foto Profil</th>
+                                        <th style="min-width: 170px">Pengirim</th>
+                                        <th style="min-width: 190px">Judul</th>
+                                        <th style="min-width: 150px">Kategori</th>
+                                        <th style="min-width: 130px">Waktu</th>
+                                        <th style="min-width: 220px" class="no-sort">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for item in complain %}
+                                    <tr>
+                                        <td class="text-center">
+                                            <div class="avatar avatar-lg">
+                                                {% if item.avatar %}
+                                                    <img src="/uploads/avatar/{{item.avatar}}" alt="..." class="avatar-img rounded-circle">
+                                                {% else %}
+                                                    <img src="/images/avatar.png" alt="..." class="avatar-img rounded-circle">
+                                                {% endif %}
+                                            </div>
+                                        </td>
+                                        <td>{{item.name | title}}</td>
+                                        <td>{{item.title | title}}</td>
+                                        <td>{{item.category | title}}</td>
+                                        <td>{{item.received_at}}</td>
+                                        <td class="text-center">
+                                            <div class="form-button-action text-white">
+                                                <a href="/icbsstaff/complain/detail/{{item.pk}}" class="btn btn-primary">
+                                                    <i class="fas fa-book-open"></i>&nbsp;Buka
+                                                </a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
