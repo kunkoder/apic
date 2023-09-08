@@ -1,7 +1,7 @@
 {
   "name": "apic",
   "version": "0.0.0",
-  "description": "Aplikasi Pengaduan Insan Cendekia",
+  "description": "Aplikasi Pengaduan Wali Murid",
   "main": "app.js",
   "private": true,
   "scripts": {
