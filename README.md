@@ -40,7 +40,7 @@ npm install
 │   ├── database.js
 │   ├── mail.js
 │   ├── route.js
-│   ├── www.js
+│   └── www.js
 ├── static
 │   ├── css
 │   ├── fonts
