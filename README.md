@@ -1,4 +1,4 @@
-# :bulb: Aplikasi Pengaduan Insan Cendekia
+# :bulb: Aplikasi Pengaduan Wali Murid
 
 Repository ini berisi sistem pusat pelayanan pengaduan wali murid berbasis web
 
